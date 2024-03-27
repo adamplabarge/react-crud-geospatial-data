@@ -1,4 +1,4 @@
-# Docker Compose React, Nodejs and MySQL example
+# Docker Compose React, Nodejs and MySQL CRID with Data Visualization
 
 ## Run the System
 We can easily run the whole with only a single command:
