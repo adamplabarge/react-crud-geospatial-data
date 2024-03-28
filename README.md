@@ -1,4 +1,4 @@
-# Docker Compose React, Nodejs and MySQL CRID with Leaflet visualization.
+# Docker Compose, React, ExpressJS, MySQL with Leaflet Map visualization.
 
 Sample app uses both browser geolocation or user selected state to find visualization data.
 
