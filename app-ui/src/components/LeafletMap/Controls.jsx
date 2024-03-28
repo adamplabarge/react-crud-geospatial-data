@@ -8,6 +8,7 @@ const Controls = ({
   isGeoLocationBased,
   isFetching,
   isFetchError,
+  onChangeToManualSelect
 }) => {
   
   const handleReload = () => window.location.reload()
@@ -16,20 +17,24 @@ const Controls = ({
 
   return (
     <div className="controls">
-      <div class="form-group">
+      <div className="form-group">
         { isFetchError && <>
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
            Error: Unable to load data.  Please try <span onClick={handleReload}>reloading.</span>
           </div>
         </>}
         {isGeoLocationBased && !isFetchError ? (
-          <div class="alert alert-primary" role="alert">
+          <div className="alert alert-primary" role="alert">
             <div className="alert__geolocation">
               <div>
                 <p>Results are based on geolocation. </p>
               </div>
               <div>
-                <button type="button" class="btn btn-primary">
+                <button 
+                  type="button" 
+                  className="btn btn-primary"
+                  onClick={onChangeToManualSelect}
+                >
                   Select by State
                 </button>
               </div>
@@ -39,24 +44,24 @@ const Controls = ({
           <>
             {isFetching ? (
               <div className="container__spinner">
-                <div class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
                 </div>
               </div>
             ) : (
               <>
-                <label for="exampleFormControlSelect1">Select a State</label>
+                <label htmlFor="exampleFormControlSelect1">Select a State</label>
                 <select
-                  class="form-control"
+                  className="form-control"
                   onChange={handleOnChange}
                   defaultValue={selected}
                   name="state-select"
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     Select your state
                   </option>
                   {options.map((option) => (
-                    <option value={option}>{option}</option>
+                    <option key={option} value={option}>{option}</option>
                   ))}
                 </select>
               </>

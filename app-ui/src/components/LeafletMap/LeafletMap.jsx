@@ -1,11 +1,10 @@
 import React, { useMemo, useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
-import Controls from "./Controls";
 import useGeolocation from 'react-hook-geolocation'
 import HospitalsDataService from "../../services/hospital.service";
-import allStates from "../../data/us-state-topo-data.json";
 import stateNamesToInitials from "../../data/state-names-to-initials.json";
-
+import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
+import Controls from "./Controls";
+import PopupBody from "./PopupBody";
 
 const traformDataForMarkers = (data) => {
   const markers = data.reduce((acc, curr) => {
@@ -92,10 +91,14 @@ const LeafletMap = () => {
     }
   }, [markers, data, geoLocationLat, geoLocationLon ]);
 
-  const hanldeChangeOption = (selection) => {
+  const handleChangeOption = (selection) => {
     const stateInitials = stateNamesToInitials[selection]
     setSelected(selection)
     fetchByState(stateInitials)
+  }
+
+  const handleOnChangeToManualSelect = () => {
+    setIsGeoLocationBased(false)
   }
 
   return (
@@ -109,7 +112,7 @@ const LeafletMap = () => {
           Boolean(mapMarkers.length) && markers.map(marker => {
             return <Marker position={marker.coordinates}>
               <Popup>
-                {marker.Facility_Name}
+                <PopupBody {...marker} />
               </Popup>
             </Marker>
           })
@@ -118,9 +121,10 @@ const LeafletMap = () => {
           isGeoLocationBased={isGeoLocationBased}
           selected={selected}
           options={Object.keys(stateNamesToInitials)}
-          onChange={hanldeChangeOption}
+          onChange={handleChangeOption}
           isFetching={isFetching}
           isFetchError={isFetchError}
+          onChangeToManualSelect={handleOnChangeToManualSelect}
         />
       </MapContainer>
     </div>
