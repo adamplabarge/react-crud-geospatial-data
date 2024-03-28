@@ -1,4 +1,11 @@
-# Docker Compose React, Nodejs and MySQL CRID with Data Visualization
+# Docker Compose React, Nodejs and MySQL CRID with Leaflet visualization.
+
+Sample app uses both browser geolocation or user selected state to find visualization data.
+
+![alt text](./screenshot.png)
+
+#### Note on data
+Hospital data needs to be imported to hospitals table. Easiest way to do that is via phpMyAdmin import process using the zip data.
 
 ## Run the System
 We can easily run the whole with only a single command:
