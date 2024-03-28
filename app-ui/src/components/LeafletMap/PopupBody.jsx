@@ -22,7 +22,7 @@ const PopupBody = ({
   Patient_Survey_Star_Rating,
   Phone_Number
 }) => {
-  return <div class="alert alert-primary" role="alert">
+  return <div className="alert alert-primary" role="alert">
     <ul className="popupbody__list">
       <li>{Facility_Name}</li>
       <li><small>{Address}</small></li>
