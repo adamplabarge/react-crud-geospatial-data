@@ -1,6 +1,20 @@
 import React from "react";
 import "./Controls.css";
 
+/**
+ * Controls component for selecting and displaying data options.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Array} props.options - The array of options to be displayed in the select dropdown.
+ * @param {Function} props.onChange - The function to be called when the select value changes.
+ * @param {string} props.selected - The currently selected value in the select dropdown.
+ * @param {boolean} props.isGeoLocationBased - A flag indicating whether the data is based on geolocation.
+ * @param {boolean} props.isFetching - A flag indicating whether data is being fetched.
+ * @param {boolean} props.isFetchError - A flag indicating whether there was an error fetching the data.
+ * @param {Function} props.onChangeToManualSelect - The function to be called when switching to manual select mode.
+ * @returns {JSX.Element} The rendered Controls component.
+ */
 const Controls = ({
   options,
   onChange,

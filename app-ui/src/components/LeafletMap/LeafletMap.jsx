@@ -6,6 +6,13 @@ import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 import Controls from "./Controls";
 import PopupBody from "./PopupBody";
 
+/**
+ * Transforms the data received from the API into an array of markers.
+ * Each marker contains information about the hospital and its coordinates.
+ *
+ * @param {object[]} data - The data received from the API.
+ * @returns {object[]} An array of markers.
+ */
 const traformDataForMarkers = (data) => {
   const markers = data.reduce((acc, curr) => {
 
@@ -27,6 +34,13 @@ const traformDataForMarkers = (data) => {
   return Object.values(markers)
 }
 
+/**
+ * LeafletMap component displays a map with markers representing hospitals.
+ * It allows the user to fetch hospitals either by state or by geolocation.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered Controls component.
+ */
 const LeafletMap = () => {
 
   const geolocation = useGeolocation()
@@ -38,6 +52,11 @@ const LeafletMap = () => {
   const [isFetching, setIsFetching] = useState(false)
   const [isFetchError, setIsFetchError] = useState(false)
 
+  /**
+   * Fetches hospitals by state.
+   *
+   * @param {string} stateInitials - The initials of the state.
+   */
   const fetchByState = async (stateInitials = 'AL') => {
     setIsFetching(true)
 
@@ -52,6 +71,12 @@ const LeafletMap = () => {
     setIsFetching(false)
   };
 
+  /**
+   * Fetches hospitals by geolocation.
+   *
+   * @param {number} lat - The latitude.
+   * @param {number} lon - The longitude.
+   */
   const fetchByGeoLocation = async (lat, lon) => {
     setIsFetching(true)
 
@@ -91,12 +116,20 @@ const LeafletMap = () => {
     }
   }, [markers, data, geoLocationLat, geoLocationLon ]);
 
+  /**
+   * Handles the change of the selected state option.
+   *
+   * @param {string} selection - The selected state option.
+   */
   const handleChangeOption = (selection) => {
     const stateInitials = stateNamesToInitials[selection]
     setSelected(selection)
     fetchByState(stateInitials)
   }
 
+  /**
+   * Handles the change to manual selection of hospitals.
+   */
   const handleOnChangeToManualSelect = () => {
     setIsGeoLocationBased(false)
   }
