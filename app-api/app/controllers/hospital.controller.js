@@ -2,12 +2,20 @@ const db = require("../models");
 const Hospital = db.hospitals;
 const Op = db.Sequelize.Op;
 
-// Retrieve all Hospitals from the database.
+/**
+ * Retrieve all Hospitals from the database.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
 exports.findAll = (req, res) => {
   const {
     state, lat, lon
   } = req.query;
 
+  /**
+   * Get the condition for filtering hospitals.
+   * @returns {Object|null} The condition object or null if no condition is specified.
+   */
   function getCondition () {
     if (state)
       return { "State": { [Op.like]: `%${state}%` } }
@@ -37,7 +45,11 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Hospital with an id
+/**
+ * Find a single Hospital with an id.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
