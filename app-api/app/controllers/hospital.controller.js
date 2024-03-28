@@ -4,10 +4,28 @@ const Op = db.Sequelize.Op;
 
 // Retrieve all Hospitals from the database.
 exports.findAll = (req, res) => {
-  const state = req.query.state;
-  var condition = state ? { "State": { [Op.like]: `%${state}%` } } : null;
+  const {
+    state, lat, lon
+  } = req.query;
 
-  Hospital.findAll({ where: condition })
+  function getCondition () {
+    if (state)
+      return { "State": { [Op.like]: `%${state}%` } }
+
+    if (lat && lon)
+      return {
+        lat: {
+          [Op.between]: [lat - 5, lat + 5] // Filtering latitude between minLat and maxLat
+        },
+        lon: {
+          [Op.between]: [lon - 5, lon + 5] // Filtering longitude between minLng and maxLng
+        }
+      }
+
+    return null
+  }
+
+  Hospital.findAll({ where: getCondition() })
     .then(data => {
       res.send(data);
     })

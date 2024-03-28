@@ -2,9 +2,9 @@
   position: absolute;
   left: calc(50% - 200px);
   width: 400px;
-  height: 100px;
+  height: 90px;
   background-color: aliceblue;
-  top: 0;
+  top: 2px;
   z-index: 9999;
   border: 2px solid #41417a;
   -webkit-box-shadow: -2px 13px 5px -8px rgba(0,0,0,0.25);
@@ -12,4 +12,19 @@
   box-shadow: -2px 13px 5px -8px rgba(0,0,0,0.25);
   border-radius: 4px;
   padding: 8px;
+}
+
+.alert__geolocation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.container__spinner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
 }

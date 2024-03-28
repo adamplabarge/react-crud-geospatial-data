@@ -12,6 +12,10 @@ class HospitalDataService {
   findByState(state) {
     return http.get(`/hospitals?state=${state}`);
   }
+
+  findByGeoLocation(lat, lon) {
+    return http.get(`/hospitals?lat=${lat}&lon=${lon}`)
+  }
 }
 
 export default new HospitalDataService();
